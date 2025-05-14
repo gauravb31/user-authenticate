@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import './Signup.css'; // Assuming you have a CSS file for styling
 
 const Signup = () => {
-  const [form, setForm] = useState({ name: '', email: '', password: '' });
+  const [form, setForm] = useState({ name: '', email: '', password: '',role: 'customer' });
 
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
@@ -24,7 +24,10 @@ const Signup = () => {
       .then(data => {
         setMessage(data);
         if (data.toLowerCase().includes("success")) {
-          navigate('/login');
+          setMessage("Signup successful!");
+          setTimeout(() => {
+            navigate('/login');
+          }, 2000);
         }
       })
       .catch(() => setMessage('Signup failed!'));
@@ -55,6 +58,10 @@ const Signup = () => {
           onChange={handleChange}
           required
         />
+        <select name="role" onChange={handleChange}>
+          <option value="customer">Customer</option>
+          <option value="admin">Admin</option>
+        </select>
         <button type="submit" className="signup-button">Signup</button>
       </form>
       <p className="signup-message">{message}</p>

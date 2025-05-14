@@ -4,8 +4,9 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Navbar from './component/Navbar';
-
-//import ProtectedRoute from './components/ProtectedRoute';
+import CustomerDashboard from './pages/CustomerDashboard';
+import AdminDashboard from './pages/AdminDashboard';
+import ProtectedRoute from './component/ProtectedRoute';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -38,6 +39,8 @@ const handleLogout = () => {
       <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} setUsername={setUsername} />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/customer-dashboard" element={<ProtectedRoute><CustomerDashboard/></ProtectedRoute>} />
+        <Route path="/admin-dashboard" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
         
         
       </Routes>

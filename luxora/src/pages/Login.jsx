@@ -21,13 +21,24 @@ const Login = ({ setIsLoggedIn, setUsername }) => {
     })
       .then(res => res.json())
       .then(data => {
-        if (data.success) {
+        if (data.success && data.role==="customer") {
           localStorage.setItem('token', data.jwtToken);
           localStorage.setItem('username', data.username);
+          localStorage.setItem('role', data.role);
+          localStorage.setItem('name', data.name);
           setIsLoggedIn(true);
           setUsername(data.username);
           setMessage("Login successful!");
-          navigate('/');
+          navigate('/customer-dashboard');
+        } else if (data.success && data.role==="admin") {
+          localStorage.setItem('token', data.jwtToken);
+          localStorage.setItem('username', data.username);
+          localStorage.setItem('role', data.role);
+          localStorage.setItem('name', data.name);
+          setIsLoggedIn(true);
+          setUsername(data.username);
+          setMessage("Login successful!");
+          navigate('/admin-dashboard');
         } else {
           setMessage(" Login failed!");
         }
